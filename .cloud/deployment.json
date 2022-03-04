@@ -1,0 +1,85 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "workspaceName": {
+            "defaultValue": "westus2-ws",
+            "type": "String",
+            "metadata": {
+                "description": "Specifies the name of the Azure Machine Learning workspace."
+            }
+        },
+        "location": {
+            "defaultValue": "westus2",
+            "type": "String"
+        },
+        "instanceType": {
+            "defaultValue": "Standard_F8s_v2",
+            "type": "String"
+        },
+        "instanceCount": {
+            "defaultValue": "1",
+            "type": "String"
+        },
+        "onlineEndpointName": {
+            "defaultValue": "hf-westus2-demo",
+            "type": "String"
+        },
+        "deploymentName": {
+            "defaultValue": "blue",
+            "type": "String"
+        },
+        "engineId": {
+            "defaultValue": "azureml://feeds/IPProtectedTestFeed/models/hugging-face-zero-shot-classification/versions/7",
+            "type": "String"
+        },
+        "modelName": {
+            "defaultValue": "facebook/bart-large-mnli",
+            "type": "String"
+        }
+    },
+    "resources": [
+        {
+            "type": "Microsoft.MachineLearningServices/workspaces/onlineEndpoints",
+            "apiVersion": "2021-10-01",
+            "name": "[concat(parameters('workspaceName'), '/', parameters('onlineEndpointName'))]",
+            "location": "[parameters('location')]",
+            "identity": {
+                "type": "SystemAssigned"
+            },
+            "properties": {
+                "authMode": "AMLToken",
+                "description": "This is an online endpoint created by an ARM template",
+                "properties": {}
+            }
+        },
+        {
+            "type": "Microsoft.MachineLearningServices/workspaces/onlineEndpoints/deployments",
+            "apiVersion": "2021-10-01",
+            "name": "[concat(parameters('workspaceName'), '/', parameters('onlineEndpointName'), '/', parameters('deploymentName'))]",
+            "dependsOn": [
+                "[resourceId('Microsoft.MachineLearningServices/workspaces/onlineEndpoints', parameters('workspaceName'), parameters('onlineEndpointName'))]"
+            ],
+            "location": "[parameters('location')]",
+            "sku": {
+                "name": "Default",
+                "capacity": "[parameters('instanceCount')]"
+            },
+            "kind": "Managed",
+            "identity": {
+                "type": "None"
+            },
+            "properties": {
+                "endpointComputeType": "Managed",
+                "model": "[parameters('engineId')]",
+                "instanceType": "[parameters('instanceType')]",
+                "scaleSettings": {
+                    "ScaleType": "Default"
+                },
+                "properties":{
+                    "AZUREML_OAI_HUGGING_FACE_MODEL": "[parameters('modelName')]"
+                }
+            }
+        }
+    ]
+}
