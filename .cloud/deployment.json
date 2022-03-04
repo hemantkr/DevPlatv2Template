@@ -35,6 +35,11 @@
         },
         "modelName": {
             "defaultValue": "facebook/bart-large-mnli",
+            "allowedValues": [
+                "facebook/bart-large-mnli",
+                "cross-encoder/nli-distilroberta-base",
+                "BaptisteDoyen/camembert-base-xnli"
+            ],
             "type": "String"
         }
     },
