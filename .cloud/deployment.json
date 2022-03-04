@@ -22,7 +22,7 @@
             "type": "String"
         },
         "onlineEndpointName": {
-            "defaultValue": "hf-westus2-demo",
+            "defaultValue": "hf-ep2",
             "type": "String"
         },
         "deploymentName": {
