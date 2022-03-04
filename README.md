@@ -32,7 +32,7 @@ Learn how Azure Machine Learning can help you streamline the building, training,
 
 ### Deploy a Hugging face model on Azure Machine Learning
 
-[![Deploy Model](https://raw.githubusercontent.com/Azure/azure-quickstart-templates/master/1-CONTRIBUTION-GUIDE/images/deploytoazure.svg?sanitize=true)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2Fhemantkr%2FDevPlatv2Template%2Fmaster%2F.cloud%deployment.json)
+[![Deploy Model](https://raw.githubusercontent.com/Azure/azure-quickstart-templates/master/1-CONTRIBUTION-GUIDE/images/deploytoazure.svg?sanitize=true)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2Fhemantkr%2FDevPlatv2Template%2Fmaster%2F.cloud%2Fdeployment.json)
 
 ### Train a LightGBM model w/ Datasets
 
